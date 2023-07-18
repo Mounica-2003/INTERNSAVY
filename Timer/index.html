@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown Timer</title>
+<style>
+    body {
+        font-family:'Times New Roman';
+        font-size: 50px;
+    text-align: center;
+    }
+    
+    h1 {
+        color:#0cc1e5;
+        font-size: 28px;
+    }
+    
+    #timer {
+        color:#0cc1e5;
+        font-size: 48px;
+        margin: 20px 0;
+    }
+    
+    button {
+        background-color:gray;
+        border: none;
+        color:#0cc1e5;
+        padding: 10px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body bgcolor="black">
+    <h1>Countdown Timer</h1>
+    <div id="timer">00:00:00</div>
+    <button onclick="startTimer()">START</button>
+    <button onclick="resetTimer()">RESET</button>
+    <button onclick="stopTimer()">STOP</button>
+
+    <script>
+        var timer;
+        var seconds = 0;
+        var minutes = 0;
+        var hours = 0;
+
+        function startTimer() {
+            timer = setInterval(displayTimer, 1000);
+        }
+
+        function displayTimer() {
+            seconds++;
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes >= 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+
+            var formattedTime =
+                (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
+                ":" +
+                (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
+                ":" +
+                (seconds > 9 ? seconds : "0" + seconds);
+
+            document.getElementById("timer").textContent = formattedTime;
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            document.getElementById("timer").textContent = "00:00:00";
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+        }
+    </script>
+</body>
+</html>
